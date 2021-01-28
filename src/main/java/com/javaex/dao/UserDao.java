@@ -14,7 +14,6 @@ public class UserDao {
 	
 	//회원가입-->회원정보 저장
 	public int insert(UserVo userVo) {
-		System.out.println("user dao insert");
 		System.out.println(userVo.toString());
 		
 		return sqlSession.insert("user.insert", userVo);
@@ -46,9 +45,7 @@ public class UserDao {
 	public UserVo getUser(int no) {
 		System.out.println("dao:" + no);
 		
-		UserVo userVo = sqlSession.selectOne("user.selectOne", no);
-		
-		return userVo;
+		return sqlSession.selectOne("user.selectOne", no);
 	}
 	
 	

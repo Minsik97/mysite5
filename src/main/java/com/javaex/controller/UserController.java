@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.javaex.dao.UserDao;
+import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -19,13 +19,15 @@ public class UserController {
 	
 	//필드
 	@Autowired
-	private UserDao userDao;
+	private UserService userService;
 	
 	//생성자
 	
 	//메소드g/s
 	
 	//일반 메소드
+	
+	
 	//회원가입 폼
 	@RequestMapping(value = "/joinForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String joinForm() {
@@ -39,9 +41,9 @@ public class UserController {
 	@RequestMapping(value = "/join", method = {RequestMethod.GET, RequestMethod.POST})
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println("/user/join");
-		System.out.println(userVo);
+		System.out.println(userVo.toString());
 		
-		int count = userDao.insert(userVo);
+		int count = userService.join(userVo);
 		
 		return "user/joinOk";
 	}
@@ -60,8 +62,8 @@ public class UserController {
 		System.out.println("/user/login");
 		System.out.println(userVo.toString());
 		
-		UserVo authUser = userDao.selectUser(userVo);
-		
+		UserVo authUser = userService.login(userVo);
+
 		if(authUser == null) {
 			System.out.println("로그인 실패");
 			return "redirect:/user/loginForm?result=fail";
@@ -90,12 +92,19 @@ public class UserController {
 	public String modifyForm(Model model, HttpSession session) {
 		System.out.println("modifyForm");
 		
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		//세션에서 no값 가져오기
+		int no = ((UserVo) session.getAttribute("authUser")).getNo();
 		
-		int no = authUser.getNo();
+		//세션값이 없으면 --> 로그인폼으로 리다이렉트
 		
-		UserVo userVo = userDao.getUser(no);
+		//내가 짠 코드 
+		//UserVo authUser = (UserVo)session.getAttribute("authUser");
+		//int no = authUser.getNo();
 		
+		// 회원정보 가져오기
+		UserVo userVo = userService.modifyForm(no);
+		
+		// jsp에 데이터 보내기
 		model.addAttribute("userVo", userVo);
 		
 		return "user/modifyForm";
@@ -110,7 +119,7 @@ public class UserController {
 		
 		userVo.setNo(authUser.getNo());
 		
-		userDao.modify(userVo);
+		userService.modify(userVo);
 		
 		authUser.setName(userVo.getName());
 		
