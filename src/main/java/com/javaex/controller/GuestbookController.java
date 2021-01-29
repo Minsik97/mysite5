@@ -21,7 +21,7 @@ public class GuestbookController {
 	
 	@RequestMapping("/addList")
 	public String list(Model model) {
-		System.out.println("controller list");
+		System.out.println("controller llist");
 		
 		List<GuestbookVo> gbList = guestbookService.gbList();
 		
