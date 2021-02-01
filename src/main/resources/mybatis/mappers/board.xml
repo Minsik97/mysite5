@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+
+	<resultMap id="resultMapBoardVo" type="com.javaex.vo.BoardVo" >
+	    <result column="no" property="no" />
+	    <result column="title" property="title" />
+	    <result column="name" property="name" />
+    	<result column="content" property="content" />
+    	<result column="hit" property="hit" />
+    	<result column="reg_date" property="reg_date" />
+    	<result column="user_no" property="user_no" />
+	</resultMap>
+
+
+	<select id="selectList" resultMap = "resultMapBoardVo">
+	
+	<![CDATA[
+		select  b.no,
+			        b.title,
+			        u.name,
+			        b.content,
+			        b.hit,
+			        b.reg_date,
+			        b.user_no
+		from board b, users u
+		where b.user_no = u.no
+		order by b.no desc
+	]]>	
+	</select>
+	
+	<insert id="insert" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			insert into board
+			values ( seq_bno.nextval,
+				          #{title},
+				          #{content},
+				          default,
+				          sysdate,
+				          #{user_no}
+			)
+		]]>
+	</insert>
+	
+	<select id="selectOne" parameterType="int" resultMap = "resultMapBoardVo">
+		<![CDATA[
+			select  b.no,
+				        u.name,
+				        b.hit,
+				        b.reg_date,
+				        b.title,
+				        b.content,
+				        b.user_no
+			from board b, users u
+			where b.user_no = u.no
+			and b.no = #{no}
+		]]>
+	</select>
+	
+	<select id="update" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			update  board
+			set title = #{title},
+			      content = #{content}
+			where no = #{no}
+		]]>
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete  from board
+			where no = #{no}
+		]]>
+	</delete>
+	
+	<select id="hitUp" parameterType="int">
+		<![CDATA[
+			update board
+			set hit = hit+1
+			where no = #{no}
+		]]>
+	</select>
+	
+	
+	
+
+</mapper>
