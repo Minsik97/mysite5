@@ -35,8 +35,8 @@ public class BoardService {
 	}
 	
 	//조회수
-	public int hitUp(int hitUp) {
-		return boardDao.hitUp(hitUp);
+	public int hitUp(int no) {
+		return boardDao.hitUp(no);
 	}
 	
 	//수정
