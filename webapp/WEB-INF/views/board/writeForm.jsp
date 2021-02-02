@@ -52,7 +52,7 @@
 							<label class="form-text" for="txt-title">제목</label> 
 							<input type="text" id="txt-title" name="title" value="" placeholder="">
 						</div>
-
+						
 						<!-- 내용 -->
 						<div class="form-group">
 							<textarea id="txt-content" name="content"></textarea>
