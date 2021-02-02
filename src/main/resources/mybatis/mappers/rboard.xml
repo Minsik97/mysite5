@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rboard">
+
+	<resultMap id="resultMapRboardVo" type="com.javaex.vo.RboardVo" >
+	    <result column="no" property="no" />
+	    <result column="title" property="title" />
+	    <result column="name" property="name" />
+    	<result column="content" property="content" />
+    	<result column="hit" property="hit" />
+    	<result column="reg_date" property="reg_date" />
+    	<result column="user_no" property="user_no" />
+    	<result column="group_no" property="group_no" />
+    	<result column="order_no" property="order_no" />
+    	<result column="depth" property="depth" />
+	</resultMap>
+	
+	<select id="selectList" resultMap = "resultMapRboardVo">
+		<![CDATA[
+			select  rboard.no,
+				        rboard.title,
+				        rboard.content,
+				        users.name,
+				        rboard.hit,
+				        rboard.reg_date,
+				        rboard.user_no,
+				        rboard.group_no,
+				        rboard.order_no,
+				        rboard.depth
+			from rboard , users
+			where rboard.user_no = users.no
+			order by rboard.group_no desc, rboard.order_no asc
+		]]>
+	</select>
+	
+	<insert id ="insert" parameterType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			insert into rboard
+			values (SEQ_RBOARD_NO.nextval,
+				         #{title},
+				         #{content},
+				         default,
+				         sysdate,
+				         #{user_no},
+				         SEQ_RBOARD_NO.currval,
+				         1,
+				         0
+			)
+		]]>
+		
+	</insert>
+	
+	
+	
+</mapper>

@@ -17,18 +17,18 @@
 
 	<select id="selectList" resultMap = "resultMapBoardVo">
 	
-	<![CDATA[
-		select  b.no,
-			        b.title,
-			        u.name,
-			        b.content,
-			        b.hit,
-			        b.reg_date,
-			        b.user_no
-		from board b, users u
-		where b.user_no = u.no
-		order by b.no desc
-	]]>	
+		<![CDATA[
+			select  b.no,
+				        b.title,
+				        u.name,
+				        b.content,
+				        b.hit,
+				        b.reg_date,
+				        b.user_no
+			from board b, users u
+			where b.user_no = u.no
+			order by b.no desc
+		]]>	
 	</select>
 	
 	<insert id="insert" parameterType="com.javaex.vo.BoardVo">

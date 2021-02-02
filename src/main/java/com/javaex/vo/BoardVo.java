@@ -121,6 +121,8 @@ public class BoardVo {
 	public void setUser_no(int user_no) {
 		this.user_no = user_no;
 	}
+	
+	
 
 	// 메소드 일반
 	@Override
