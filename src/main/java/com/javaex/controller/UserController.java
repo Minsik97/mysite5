@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
@@ -43,7 +45,7 @@ public class UserController {
 		System.out.println("/user/join");
 		System.out.println(userVo.toString());
 		
-		int count = userService.join(userVo);
+		userService.join(userVo);
 		
 		return "user/joinOk";
 	}
@@ -125,6 +127,25 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	//회원가입 - 아이디 체크
+	@ResponseBody
+	@RequestMapping (value = "/idcheck", method = {RequestMethod.GET, RequestMethod.POST})
+	public String idcheck(@RequestParam("id") String id, @RequestParam("password") String password) {
+		//패스워드는 테스트용으로 추가함
+		
+		System.out.println("idcheck");
+		System.out.println("idcheck = " + id);
+		System.out.println("password = " + password);
+		
+		String result = userService.idcheck(id);
+		
+		System.out.println(result);
+		
+		//return  "redirect:/user/joinForm?result=" + result;
+		return  result;  //@ResponseBody --> response의 body영역에 data만 보낸다.(return 값)
+	}
+	
 	
 	
 }

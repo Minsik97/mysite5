@@ -31,7 +31,6 @@ public class UserService {
 		System.out.println("userService modifyForm()");
 		
 		return userDao.getUser(no);
-		
 	}
 	
 	//회원정보 수정
@@ -39,7 +38,31 @@ public class UserService {
 		System.out.println("userService modify()");
 		
 		return userDao.modify(userVo);
-		
 	}
+	
+	//회원가입 - 아이디체크
+	public String idcheck(String id) {
+		System.out.println("userService idcheck() = " + id);
+		
+		UserVo userVo = userDao.selectOne(id);
+		
+		String result = "";
+
+		if(userVo == null ) {
+			//사용가능한 id
+			result = "can";
+		}else {
+			//사용불가능한  id
+			result = "cant";
+		}
+		
+		return result;		
+	}
+	
+	
+	
+	
+	
+	
 	
 }

@@ -1,3 +1,4 @@
+/*
 package com.javaex.controller;
 
 import java.util.List;
@@ -27,13 +28,14 @@ public class RboardController {
 		System.out.println("controller list");
 		
 		List<RboardVo> list = rboardService.list();
+		System.out.println(list);
 		
 		model.addAttribute("list", list);
 		
 		return "/rboard/list";
 	}
 	
-	//댓글 쓰기 폼
+	//글쓰기 폼
 	@RequestMapping(value = "/writeForm")
 	public String writeForm() {
 		System.out.println("controller writeForm");
@@ -41,10 +43,11 @@ public class RboardController {
 		return "/rboard/writeForm";
 	}
 	
-	//댓글 쓰기
+	// 글쓰기
 	@RequestMapping (value = "/write")
 	public String write (RboardVo rboardVo, HttpSession session) {
 		System.out.println("controller write");
+		System.out.println(rboardVo);
 		
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		
@@ -57,5 +60,8 @@ public class RboardController {
 		return  "redirect:/rboard/list";
 	}
 	
+	@RequestMapping(value = "/comment")
+	
 	
 }
+*/

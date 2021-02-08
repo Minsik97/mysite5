@@ -48,5 +48,12 @@ public class UserDao {
 		return sqlSession.selectOne("user.selectOne", no);
 	}
 	
+	//회원가입 - 아이디체크
+	public UserVo selectOne(String id) {
+		System.out.println("dao: " + id);
+		return sqlSession.selectOne("user.selectById", id);
+		
+	}
+	
 	
 }
