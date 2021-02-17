@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
+encoding//webapp/WEB-INF/views/guestbook/ajaxList.jsp=UTF-8
 encoding//webapp/WEB-INF/views/main/index.jsp=UTF-8

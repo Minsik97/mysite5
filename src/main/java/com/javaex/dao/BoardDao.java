@@ -1,6 +1,8 @@
 package com.javaex.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,36 @@ public class BoardDao {
 		System.out.println("dao 리스트");
 		
 		return sqlSession.selectList("board.selectList");
+	}
+	
+	//글전체 가져오기2(키워드)
+	public List<BoardVo>selectList2(String keyword){
+		System.out.println("dao selectList2");
+		System.out.println("keyword = " + keyword);
+		
+		List<BoardVo> boardList = sqlSession.selectList("board.selectList2", keyword);
+		
+		return boardList;
+	}
+	
+	//글전체 가져오기3(키워드+페이징)
+	public List<BoardVo>selectList3(String keyword, int startRnum, int endRnum){
+		System.out.println("dao selectList3");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("startRnum", startRnum);
+		map.put("endRnum", endRnum);
+		System.out.println(map);
+		
+		return sqlSession.selectList("board.selectList3", map);
+	}
+	
+	//전체 글 갯수 가져오기
+	public int selectTotalCnt (String keyword) {
+		System.out.println("dao.selectTotalCnt");
+		
+		return sqlSession.selectOne("board.selectTotalCnt", keyword);
 	}
 	
 	//등록

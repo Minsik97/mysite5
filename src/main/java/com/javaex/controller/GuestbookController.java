@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.GuestbookService;
 import com.javaex.vo.GuestbookVo;
@@ -60,5 +61,18 @@ public class GuestbookController {
 			return "guestbook/passwordcheck";
 		}
 	}
+	
+	// ajaxList
+	@RequestMapping (value = "ajaxList", method = {RequestMethod.GET, RequestMethod.POST})
+	public String ajaxList() {
+		System.out.println("controller ajaxList");
+		
+		return "guestbook/ajaxList";
+	}
+	
+	
+	
+	
+	
 	
 }

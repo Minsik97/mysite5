@@ -1,4 +1,4 @@
-/*
+
 package com.javaex.controller;
 
 import java.util.List;
@@ -60,8 +60,5 @@ public class RboardController {
 		return  "redirect:/rboard/list";
 	}
 	
-	@RequestMapping(value = "/comment")
-	
 	
 }
-*/

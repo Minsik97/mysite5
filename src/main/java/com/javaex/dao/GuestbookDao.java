@@ -31,9 +31,26 @@ public class GuestbookDao {
 	
 	//삭제
 	public int delete(GuestbookVo guestbookVo) {
-		System.out.println("dao 등록");
+		System.out.println("dao 삭제");
 		
 		return sqlSession.delete("guestbook.delete", guestbookVo);
+	}
+	
+	//글 저장(selectkey)
+	public int insertSelectKey(GuestbookVo guestbookVo) {
+		System.out.println("dao insertSelectKey");
+		
+		System.out.println("dao:xml 실행전----> " + guestbookVo);
+		sqlSession.insert("guestbook.insertSelectKey", guestbookVo);
+		System.out.println("dao:xml 실행후----> " + guestbookVo);
+		return guestbookVo.getNo();
+	}
+	
+	//글 1개 가져오기
+	public GuestbookVo selectOne(int no) {
+		System.out.println("dao selectOne");
+		
+		return sqlSession.selectOne("guestbook.select", no);
 	}
 	
 	
